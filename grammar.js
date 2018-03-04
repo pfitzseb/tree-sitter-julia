@@ -16,7 +16,7 @@ const PREC = {
   BITSHIFT: 12,
   TIMES: 13,
   RATIONAL: 14,
-	UNARY: 15,
+  UNARY: 15,
   POWER: 16,
   DECL: 17,
   DOT: 18
@@ -40,7 +40,7 @@ module.exports = grammar({
 
     _expression: $ => choice(
       $.function_call,
-			// $.unary_expression,
+  // $.unary_expression,
       $.binary_expression
     ),
 
@@ -48,18 +48,18 @@ module.exports = grammar({
 
     function_call: $ => seq($.identifier, /*optional\('\.'\),*/ '(', commaSep1(repeat($._expression)), ')'),
 
-		unary_expression: $ => choice(
-			prec(PREC.UNARY, seq(/*optional\('\.'\),*/ '+', $._expression)),
-			prec.left(PREC.UNARY, seq(/*optional\('\.'\),*/ '-', $._expression)),
-			prec.right(PREC.UNARY, seq(/*optional\('\.'\),*/ '!', $._expression)),
-			prec.right(PREC.UNARY, seq(/*optional\('\.'\),*/ '~', $._expression)),
-			prec.right(PREC.UNARY, seq(/*optional\('\.'\),*/ '¬', $._expression)),
-			prec.right(PREC.UNARY, seq(/*optional\('\.'\),*/ '√', $._expression)),
-			prec.right(PREC.UNARY, seq(/*optional\('\.'\),*/ '∛', $._expression)),
-			prec.right(PREC.UNARY, seq(/*optional\('\.'\),*/ '∜', $._expression)),
-			prec.right(PREC.UNARY, seq('<:', $._expression)),
-			prec.right(PREC.UNARY, seq('>:', $._expression)),
-		),
+  unary_expression: $ => choice(
+  prec(PREC.UNARY, seq(/*optional\('\.'\),*/ '+', $._expression)),
+  prec.left(PREC.UNARY, seq(/*optional\('\.'\),*/ '-', $._expression)),
+  prec.right(PREC.UNARY, seq(/*optional\('\.'\),*/ '!', $._expression)),
+  prec.right(PREC.UNARY, seq(/*optional\('\.'\),*/ '~', $._expression)),
+  prec.right(PREC.UNARY, seq(/*optional\('\.'\),*/ '¬', $._expression)),
+  prec.right(PREC.UNARY, seq(/*optional\('\.'\),*/ '√', $._expression)),
+  prec.right(PREC.UNARY, seq(/*optional\('\.'\),*/ '∛', $._expression)),
+  prec.right(PREC.UNARY, seq(/*optional\('\.'\),*/ '∜', $._expression)),
+  prec.right(PREC.UNARY, seq('<:', $._expression)),
+  prec.right(PREC.UNARY, seq('>:', $._expression)),
+  ),
 
     binary_expression: $ => choice(
       ...[
@@ -125,7 +125,7 @@ module.exports = grammar({
         '⫌','⫍','⫎','⫏','⫐','⫑','⫒','⫓','⫔','⫕','⫖','⫗','⫘','⫙','⫷','⫸','⫹','⫺',
         '⊢','⊣','⟂',
       ].map((operator) =>
-			  // FIXME: Should actually have no special associativity
+    // FIXME: Should actually have no special associativity
         prec.right(PREC.COMPARISON, seq($._expression, /*optional\('\.'\),*/ operator, $._expression))
       ),
       ...[
