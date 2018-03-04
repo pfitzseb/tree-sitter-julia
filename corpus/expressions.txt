@@ -1,0 +1,23 @@
+============================================
+Basic stuff
+============================================
+
+foo = bar
+
+----
+
+(program
+  (assignment
+    (identifier) (identifier)))
+
+============================================
+Operators
+============================================
+
+foo + bar
+
+----
+
+(program
+  (binary_expression
+    (identifier) (identifier)))
